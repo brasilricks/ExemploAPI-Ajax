@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Detalhes \"Javascript\"";
+}
+
+<h2>Detalhes do Personagem</h2>
+<div class="container listagem">
+    <div class="col-md-9">
+        <div class="col-md-12">
+            <table id="pessonDetalhes" class="table table-borderless">
+                <tr><td class="text-right" width="130px"><strong>Nome: </strong></td><td id="detName"></td></tr>
+                <tr><td class="text-right" width="130px"><strong>Status: </strong></td><td id="detStat"></td></tr>
+                <tr><td class="text-right" width="130px"><strong>Especie: </strong></td><td id="detEspe"></td></tr>
+                <tr><td class="text-right" width="130px"><strong>Genero: </strong></td><td id="detGene"></td></tr>
+                <tr><td class="text-right" width="130px"><strong>Origem: </strong></td><td id="detOrig"></td></tr>
+            </table>
+        </div>
+        <div class="col-md-12 rounded">
+            <h4><strong>Lista de episódios que o personagem aparece</strong></h4>
+            <div class='col-md-12' id="listEpsi">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <img src='' class="imgDet" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-md-5 "></div>
+            <div class="col-md-2 ">
+                <a href="~/home/ListaJS/" id="btmRetornar" class="btn btn-default">Voltar</a>
+            </div>
+            <div class="col-md-5 "></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var idPerson = "@ViewBag.Message"
+        var urlDetPerson = 'https://rickandmortyapi.com/api/character/' + idPerson
+        $(document).ready(function() {
+           $.ajax({
+            url: urlDetPerson,
+            success: function (data) {
+                    let dName = (data.name != "unknown" ? data.name : " ")
+                    let dStatus = (data.status != "unknown" ? data.status : " ")
+                    let dSpecies = (data.species != "unknown" ? data.species : " ")
+                    let dGender = (data.gender != "unknown" ? data.gender : " ")
+                    let dOrig = (data.origin.name != "unknown" ? data.origin.name : " ")
+
+                    $("#detName").append(dName);
+                    $("#detStat").append(dStatus);
+                    $("#detEspe").append(dSpecies);
+                    $("#detGene").append(dGender);
+                    $("#detOrig").append(dOrig);
+                    $(".imgDet").attr('src', data.image);
+
+                    $.each(data.episode, function(index) {
+                        let totalEpisodeos = index
+                        //let episodeo = "<div>" + data.episode[index] + "</div>";
+                        let partes = data.episode[index].split('/');
+                        let ultimo = partes.slice(-1);
+                        let episodeo = "<div class='col-md-2'>Episodeo "  + ultimo + "</div>";
+                        $("#listEpsi").append(episodeo);
+                    });
+                },
+            error: function (request, status, error) {
+                alert("erro Ajax");
+            }
+           });
+        });
+
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>Modelos, para consumo do mesmo <strong>WebService</strong></h2>
+<div class="jumbotron">
+    <p>Todas os links, apresentam o mesmo conteúdo uma página “list” e uma pagina “detales”, a única diferença está nos diferentes métodos de consulta Rest, para ter acesso às API “Rick and Morty”...</p>
+    <p>@*Ao final na página detalhes, há um link para as “prints” dos códigos fontes usados.*@</p>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var itens in Model)
+        {
+            <div class="col-sm-2 card_bg">
+                <div class="card">
+                    <div class="col-sm-12 text-center">
+                        <img class="card-img-top" src="~/img/@itens.img" alt="">
+                    </div>
+                    <h5 class="card-title">@itens.ferramenta</h5>
+                    <p class="card-text card-descr">@itens.descricao</p>
+                    <p class="card-text  text-center">
+                        <a href="@itens.link" target="_blank">Mais informação...</a>
+                    </p>                    
+                    <div class="card-body text-center">
+                        <a href="~/Home/@itens.lista" class="btn btn-primary">Ir para Lista</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
