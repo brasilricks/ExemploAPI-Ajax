@@ -1,9 +1,0 @@
-[
-  {
-    "ferramenta": "Ajax",
-    "img": "logo_ajax.png",
-    "descricao": "Foco em \"front end\", a ASP.NET AJAX consiste em bibliotecas de script do lado cliente e de componentes de servidor integrados...",
-    "link": "https://learn.microsoft.com/pt-br/dotnet/framework/wcf/feature-details/creating-wcf-services-for-aspnet-ajax",
-    "lista": "ListaJS"
-  }
-]
